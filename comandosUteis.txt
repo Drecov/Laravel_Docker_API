@@ -1,0 +1,7 @@
+Esse arquivo é para eu me lembrar de alguns comandos úteis para rodar o projeto em Docker.
+
+1. docker compose up --build
+2. docker compose up/down
+3. docker compose exec app php artisan migrate:fresh --seed
+4. docker compose exec app php artisan migrate
+5. docker compose exec app php artisan make:model ModeloQueEuQuero --all
