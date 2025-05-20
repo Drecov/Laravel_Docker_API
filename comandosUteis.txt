@@ -5,3 +5,4 @@ Esse arquivo é para eu me lembrar de alguns comandos úteis para rodar o projet
 3. docker compose exec app php artisan migrate:fresh --seed
 4. docker compose exec app php artisan migrate
 5. docker compose exec app php artisan make:model ModeloQueEuQuero --all
+    5.1 Esse comando cria o modelo, factory, migration, seeder, request, controller e policy.
