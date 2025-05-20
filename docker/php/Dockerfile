@@ -2,7 +2,7 @@ FROM php:8.2-fpm
 
 WORKDIR /var/www
 
-# Atualizar e instalar dependências do sistema (git, curl, zip, etc) em uma única camada
+# Instalar dependências do sistema e extensões PHP
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -15,14 +15,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mbstring zip exif pcntl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instalar composer globalmente
+# Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copiar arquivos composer.json e composer.lock primeiro para aproveitar cache do Docker
-COPY ./app/composer.json ./app/composer.lock ./
-
-# Instalar dependências do composer
-RUN composer install --no-interaction --optimize-autoloader
-
-# Copiar o restante do código da aplicação
+# Copiar TODO o código da aplicação Laravel
 COPY ./app ./
