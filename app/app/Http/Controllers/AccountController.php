@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AccountController extends Controller
 {
@@ -66,6 +68,23 @@ class AccountController extends Controller
 
     public function testeSeApareceARota() 
     {
-        //
+        Account::find();
+    }
+
+    public function getBalance(Request $request)
+    {
+        $accountId = $request->query('account_id');
+        if(!$accountId) {
+            return response()->json([
+                'message' => 'Parâmetro "account_id" é obrigatório.',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $account = Account::where('account_id', $accountId)->first();
+        if(! $account) {
+            return response()->json(0, Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($account->balance, Response::HTTP_OK);
     }
 }
