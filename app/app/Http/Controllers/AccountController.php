@@ -13,7 +13,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        return Account::all();
     }
 
     /**
@@ -60,6 +60,11 @@ class AccountController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Account $account)
+    {
+        //
+    }
+
+    public function testeSeApareceARota() 
     {
         //
     }
