@@ -87,4 +87,9 @@ class AccountController extends Controller
 
         return response()->json($account->balance, Response::HTTP_OK);
     }
+
+    public function processEvent (Request $request)
+    {
+        //Algum código aqui
+    }
 }

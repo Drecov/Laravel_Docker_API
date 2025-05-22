@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/balance', [AccountController::class, 'getBalance']);
-Route::post('/event', [AccountController::class, 'testeSeApareceARota']);
+Route::post('/event', [AccountController::class, 'processEvent']);
 Route::post('/reset', [AccountController::class, 'testeSeApareceARota']);
 
 Route::fallback(function() {
