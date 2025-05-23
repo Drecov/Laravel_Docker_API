@@ -18,6 +18,18 @@ services:
       - laravel
     command: sh -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
 
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - laravel
+
   mysql:
     image: mysql:8.0
     container_name: mysql_db

@@ -6,3 +6,5 @@ Esse arquivo é para eu me lembrar de alguns comandos úteis para rodar o projet
 4. docker compose exec app php artisan migrate
 5. docker compose exec app php artisan make:model ModeloQueEuQuero --all
     5.1 Esse comando cria o modelo, factory, migration, seeder, request, controller e policy.
+6. docker exec -it laravel_app php artisan key:generate
+    6.1 Cria uma APP_KEY no .env
