@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/balance', [AccountController::class, 'getBalance']);
 Route::get('/allAccounts', [AccountController::class, 'getAllAccounts']);
 Route::post('/event', [AccountController::class, 'processEvent']);
-Route::post('/reset', [AccountController::class, 'testeSeApareceARota']);
+Route::post('/reset', [AccountController::class, 'resetAccount']);
 
 Route::fallback(function() {
     // abort(400, 'Bad Request. See endpoint List.');

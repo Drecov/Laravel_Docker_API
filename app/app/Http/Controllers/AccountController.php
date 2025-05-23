@@ -86,11 +86,46 @@ class AccountController extends Controller
             return response()->json(0, Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json($account->balance, Response::HTTP_OK);
+        return response($account->balance, Response::HTTP_OK);
     }
 
     public function processEvent (Request $request)
     {
-        
+        $type = $request->input('type');
+        switch ($type) {
+            case 'deposit':
+                return $this->processDeposit($request);
+
+            case 'withdraw':
+                return $this->processWithdraw($request);
+
+            case 'transfer':
+                return $this->processTransfer($request);
+
+            default:
+                return response()->json([
+                    'message'=> 'Tipo de evento não encontrado.'
+                ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    private function processDeposit(Request $request)
+    {
+
+    }
+
+    private function processWithdraw(Request $request)
+    {
+
+    }
+
+    private function processTransfer(Request $request)
+    {
+
+    }
+
+    public function resetAccount(Request $request) {
+        Account::query()->delete();
+        return response('OK', Response::HTTP_OK);
     }
 }
