@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Resources\AccountResource;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -66,9 +67,9 @@ class AccountController extends Controller
         //
     }
 
-    public function testeSeApareceARota() 
+    public function getAllAccounts() 
     {
-        Account::find();
+        return AccountResource::collection(Account::all());
     }
 
     public function getBalance(Request $request)
@@ -90,6 +91,6 @@ class AccountController extends Controller
 
     public function processEvent (Request $request)
     {
-        //Algum código aqui
+        
     }
 }
