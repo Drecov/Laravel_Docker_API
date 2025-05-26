@@ -83,7 +83,7 @@ class AccountController extends Controller
 
         $account = Account::where('account_id', $accountId)->first();
         if(! $account) {
-            return response()->json(0, Response::HTTP_NOT_FOUND);
+            return response(0, Response::HTTP_NOT_FOUND);
         }
 
         return response($account->balance, Response::HTTP_OK);
@@ -92,6 +92,14 @@ class AccountController extends Controller
     public function processEvent (Request $request)
     {
         $type = $request->input('type');
+
+        if (is_null($type)) {
+            return response()->json([
+                'message'=> 'O Tipo de evento é obrigatório.',
+                'status' => Response::HTTP_BAD_REQUEST
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         switch ($type) {
             case 'deposit':
                 return $this->processDeposit($request);
@@ -104,7 +112,8 @@ class AccountController extends Controller
 
             default:
                 return response()->json([
-                    'message'=> 'Tipo de evento não encontrado.'
+                    'message'=> 'Tipo de evento \"' . $type . '\" não encontrado.',
+                    'status' => Response::HTTP_BAD_REQUEST
                 ], Response::HTTP_BAD_REQUEST);
         }
     }
