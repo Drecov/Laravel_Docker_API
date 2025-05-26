@@ -120,17 +120,42 @@ class AccountController extends Controller
 
     private function processDeposit(Request $request)
     {
+        $destination = $request->input('destination');
+        $amount = $request->input('amount');
 
+        if(is_null($destination) || is_null($amount)) {
+            return response()->json([
+                'message'=> 'Dados de destino e valor são obrigatórios.',
+                'status' => Response::HTTP_BAD_REQUEST
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     private function processWithdraw(Request $request)
     {
+        $origin = $request->input('origin');
+        $amount = $request->input('amount');
 
+        if(is_null($origin) || is_null($amount)) {
+            return response()->json([
+                'message'=> 'Dados de origem e valor são obrigatórios.',
+                'status' => Response::HTTP_BAD_REQUEST
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     private function processTransfer(Request $request)
     {
+        $destination = $request->input('destination');
+        $origin = $request->input('origin');
+        $amount = $request->input('amount');
 
+        if(is_null($destination) || is_null($origin) || is_null($amount)) {
+            return response()->json([
+                'message'=> 'Dados de destino, origem e valor são obrigatórios.',
+                'status' => Response::HTTP_BAD_REQUEST
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     public function resetAccount(Request $request) {
