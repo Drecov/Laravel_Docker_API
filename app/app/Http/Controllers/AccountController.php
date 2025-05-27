@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\AccountService;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Resources\AccountResource;
@@ -11,9 +12,17 @@ use Illuminate\Http\Response;
 
 class AccountController extends Controller
 {
+    protected $accountService;
+
+    public function __construct(AccountService $accountService)
+    {
+        $this->accountService = $accountService;
+    }
+
     public function getAllAccounts() 
     {
-        return AccountResource::collection(Account::all());
+        $accounts = $this->accountService->getAllAccounts();
+        return AccountResource::collection($accounts);
     }
 
     public function getBalance(Request $request)
@@ -25,12 +34,12 @@ class AccountController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $account = Account::where('account_id', $accountId)->first();
-        if(! $account) {
+        $balance = $this->accountService->getBalance($accountId);
+        if(! $balance) {
             return response(0, Response::HTTP_NOT_FOUND);
         }
 
-        return response($account->balance, Response::HTTP_OK);
+        return response($balance, Response::HTTP_OK);
     }
 
     public function processEvent (Request $request)
@@ -73,6 +82,9 @@ class AccountController extends Controller
                 'status' => Response::HTTP_BAD_REQUEST
             ], Response::HTTP_BAD_REQUEST);
         }
+
+        $ret = $this->accountService->deposit($destination, $amount);
+        return response($ret['payload'], $ret['status']);
     }
 
     private function processWithdraw(Request $request)
@@ -86,6 +98,9 @@ class AccountController extends Controller
                 'status' => Response::HTTP_BAD_REQUEST
             ], Response::HTTP_BAD_REQUEST);
         }
+
+        $ret = $this->accountService->withdraw($origin, $amount);
+        return response($ret['payload'], $ret['status']);
     }
 
     private function processTransfer(Request $request)
@@ -100,10 +115,13 @@ class AccountController extends Controller
                 'status' => Response::HTTP_BAD_REQUEST
             ], Response::HTTP_BAD_REQUEST);
         }
+
+        $ret = $this->accountService->transfer($destination, $origin, $amount);
+        return response($ret['payload'], $ret['status']);
     }
 
     public function resetAccount(Request $request) {
-        Account::query()->delete();
+        $this->accountService->resetAccounts();
         return response('OK', Response::HTTP_OK);
     }
 }
