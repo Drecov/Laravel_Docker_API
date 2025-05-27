@@ -8,4 +8,5 @@ done
 
 composer install
 php artisan migrate --force
+php artisan test
 exec php artisan serve --host=0.0.0.0 --port=8000
