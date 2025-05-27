@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Services;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\Account;
 
 class AccountService
@@ -41,7 +39,7 @@ class AccountService
             'account_id' => $account->account_id,
             'balance' => $account->balance,
             'payload'=> $payload,
-            'status' => Response::HTTP_CREATED
+            'status' => 'success'
         ];
     }
 
@@ -53,7 +51,7 @@ class AccountService
                 'account_id' => $origin,
                 'balance' => 0,
                 'payload' => 0,
-                'status' => Response::HTTP_NOT_FOUND
+                'status' => 'error'
             ];
         }
 
@@ -64,17 +62,17 @@ class AccountService
             'account_id' => $account->account_id,
             'balance' => $account->balance,
             'payload'=> $payload,
-            'status' => Response::HTTP_CREATED
+            'status' => 'success'
         ];
     }
 
     public function transfer($destination, $origin, $amount)
     {
         $originRet = $this->withdraw($origin, $amount);
-        if($originRet['status'] != Response::HTTP_CREATED) {
+        if($originRet['status'] != 'success') {
             return [
                 'payload' => 0,
-                'status' => Response::HTTP_NOT_FOUND
+                'status' => 'error'
             ];
         }
 
@@ -82,7 +80,7 @@ class AccountService
         $payload = '{"origin": {"id":"'.$originRet['account_id'].'", "balance":'.$originRet['balance'].'}, "destination": {"id":"'.$destinationRet['account_id'].'", "balance":'.$destinationRet['balance'].'}}';
         return [
             'payload' => $payload,
-            'status' => Response::HTTP_CREATED
+            'status' => 'success'
         ];
     }
 }

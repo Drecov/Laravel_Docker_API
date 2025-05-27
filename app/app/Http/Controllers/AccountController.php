@@ -85,7 +85,12 @@ class AccountController extends Controller
         }
 
         $ret = $this->accountService->deposit($destination, $amount);
-        return response($ret['payload'], $ret['status']);
+        return response(
+            $ret['payload'], 
+            $ret['status']=='success' ? 
+                Response::HTTP_CREATED : 
+                Response::HTTP_NOT_FOUND
+        );
     }
 
     private function processWithdraw(AccountEventRequest $request)
@@ -101,7 +106,12 @@ class AccountController extends Controller
         }
 
         $ret = $this->accountService->withdraw($origin, $amount);
-        return response($ret['payload'], $ret['status']);
+        return response(
+            $ret['payload'], 
+            $ret['status']=='success' ? 
+                Response::HTTP_CREATED : 
+                Response::HTTP_NOT_FOUND
+        );
     }
 
     private function processTransfer(AccountEventRequest $request)
@@ -118,7 +128,12 @@ class AccountController extends Controller
         }
 
         $ret = $this->accountService->transfer($destination, $origin, $amount);
-        return response($ret['payload'], $ret['status']);
+        return response(
+            $ret['payload'], 
+            $ret['status']=='success' ? 
+                Response::HTTP_CREATED : 
+                Response::HTTP_NOT_FOUND
+        );
     }
 
     public function resetAccount(Request $request) {
