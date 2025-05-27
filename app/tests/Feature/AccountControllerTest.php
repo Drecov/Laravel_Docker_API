@@ -89,24 +89,30 @@ class AccountControllerTest extends TestCase
          ]);
     }
 
-        public function test_post_event_transfer_returns_json()
+    public function test_post_event_transfer_returns_json()
     {
         $this->accountService->shouldReceive('transfer')
-        ->with(1234,5678,1000)->once()
-        ->andReturn(['status' => 'success', 'payload' => ['origin' => 1234, 'destination' => 5678, 'balance' => 1000]]);
-        
+            ->with(1234, 4567, 500)
+            ->once()
+            ->andReturn([
+                'status' => 'success',
+                'payload' => [
+                    'origin' => ['id' => '4567', 'balance' => 500],
+                    'destination' => ['id' => '1234', 'balance' => 1500]
+                ]
+            ]);
+
         $response = $this->postJson('/event', [
             'type' => 'transfer',
-            'origin' => 1234,
-            'destination' => 5678,
-            'amount' => 1000
+            'origin' => 4567,
+            'destination' => 1234,
+            'amount' => 500
         ]);
 
         $response->assertCreated()
-        ->assertJson([
-            'origin' => '1234',
-            'destination' => '5678',
-            'balance' => 1000
-         ]);
+            ->assertJson([
+                'origin' => ['id' => '4567', 'balance' => 500],
+                'destination' => ['id' => '1234', 'balance' => 1500]
+            ]);
     }
 }
