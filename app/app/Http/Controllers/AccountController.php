@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\AccountService;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Requests\AccountEventRequest;
 use App\Http\Resources\AccountResource;
 use App\Models\Account;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class AccountController extends Controller
         return response($balance, Response::HTTP_OK);
     }
 
-    public function processEvent (Request $request)
+    public function processEvent (AccountEventRequest $request)
     {
         $type = $request->input('type');
 
@@ -71,7 +72,7 @@ class AccountController extends Controller
         }
     }
 
-    private function processDeposit(Request $request)
+    private function processDeposit(AccountEventRequest $request)
     {
         $destination = $request->input('destination');
         $amount = $request->input('amount');
@@ -87,7 +88,7 @@ class AccountController extends Controller
         return response($ret['payload'], $ret['status']);
     }
 
-    private function processWithdraw(Request $request)
+    private function processWithdraw(AccountEventRequest $request)
     {
         $origin = $request->input('origin');
         $amount = $request->input('amount');
@@ -103,7 +104,7 @@ class AccountController extends Controller
         return response($ret['payload'], $ret['status']);
     }
 
-    private function processTransfer(Request $request)
+    private function processTransfer(AccountEventRequest $request)
     {
         $destination = $request->input('destination');
         $origin = $request->input('origin');
