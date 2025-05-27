@@ -1,7 +1,9 @@
 #RODANDO O PROJETO:
-Este projeto possui é uma API segregada e Dockerizada, tal qual para rodar o projeto é necessário somente o Git e Docker instalados na máquina local.
+- Este projeto possui é uma API segregada e Dockerizada, tal qual para rodar o projeto é necessário somente o Git e Docker instalados na máquina local.
 
-Uma vez instalados o Git e Docker seguir os seguintes passo: Rodar o comando `docker compose up --build` na pasta base do projeto.
+- Uma vez instalados o Git e Docker seguir os seguintes passos:
+1. Realizar o clone do projeto público: `git clone https://github.com/Drecov/Laravel_Docker_API.git` 
+2. Subir o ambiente docker: `docker compose up --build` na pasta raiz do projeto.
 
 #CONTAINERS
 1. app: Container onde roda a aplicação Laravel.
