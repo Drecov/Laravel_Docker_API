@@ -1,3 +1,9 @@
+#DEPENDÊNCIAS
+
+Para rodar o projeto, é necessário ter instalado localmente as seguintes dependências:
+1. GIT.
+2. Docker.
+
 #RODANDO O PROJETO:
 
 Este projeto possui é uma API segregada e Dockerizada, tal qual para rodar o projeto é necessário somente o Git e Docker instalados na máquina local.
