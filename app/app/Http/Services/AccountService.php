@@ -26,7 +26,13 @@ class AccountService
 
     public function resetAccounts(): void
     {
-        Account::query()->delete();
+        try {
+            if (Account::query()->exists()) {
+                Account::query()->delete();
+            }
+        } catch (\Throwable $e) {
+            return;
+        }
     }
 
     public function deposit($destination, $amount)
