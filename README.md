@@ -11,9 +11,10 @@ Este projeto possui é uma API segregada e Dockerizada, tal qual para rodar o pr
 
 Uma vez instalados o Git e Docker seguir os seguintes passos:
 1. Realizar o clone do projeto público: `git clone https://github.com/Drecov/Laravel_Docker_API.git`.
-2. Subir o ambiente docker: `docker compose up --build` na pasta raiz do projeto.
-3. Para parar o projeto, rodar `docker compose down` para remover os containers (ou `docker compose down -v --remove-orphans` caso tenham erros ao tentar subir o projeto).
-4. Certificar-se que o arquivo `docker/php/entrypoint.sh` está salvo como LF, não CLRF. Caso esteja, não rodará corretamente no container.
+2. Subindo o ambiente a primeira vez: deve-se fazer o build do ambiente docker: `docker compose up --build` na pasta raiz do projeto.
+3. Subindo o projeto após realizada a build: rodar o comando `docker compose up` na pasta raiz do projeto. 
+4. Para parar o projeto, rodar `docker compose down` para remover os containers (ou `docker compose down -v --remove-orphans` para remover os volumes e networks também).
+5. Certificar-se que o arquivo `docker/php/entrypoint.sh` está salvo como LF, não CLRF. Caso esteja, não rodará corretamente no container.
 
 
 #CONTAINERS
