@@ -13,6 +13,7 @@ Uma vez instalados o Git e Docker seguir os seguintes passos:
 1. Realizar o clone do projeto público: `git clone https://github.com/Drecov/Laravel_Docker_API.git`.
 2. Subir o ambiente docker: `docker compose up --build` na pasta raiz do projeto.
 3. Para parar o projeto, rodar `docker compose down` para remover os containers (ou `docker compose down -v --remove-orphans` caso tenham erros ao tentar subir o projeto).
+4. Certificar-se que o arquivo `docker/php/entrypoint.sh` está salvo como LF, não CLRF. Caso esteja, não rodará corretamente no container.
 
 
 #CONTAINERS
