@@ -21,12 +21,17 @@ class AccountEventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'type' => 'required|in:deposit,withdraw,transfer',
-            'amount' => 'required|numeric|min:0.01',
+        // return [
+        //     'type' => 'required|in:deposit,withdraw,transfer',
+        //     'amount' => 'required|numeric|min:0.01',
 
-            'destination' => 'required_if:type,deposit,transfer|integer',
-            'origin' => 'required_if:type,withdraw,transfer|integer',
+        //     'destination' => 'required_if:type,deposit,transfer|integer',
+        //     'origin' => 'required_if:type,withdraw,transfer|integer',
+        // ];
+        return [
+            'amount' => 'numeric|min:0.01',
+            'destination' => 'integer',
+            'origin' => 'integer',
         ];
     }
 }

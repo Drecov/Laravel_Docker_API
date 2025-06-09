@@ -77,7 +77,7 @@ class AccountController extends Controller
         $destination = $request->input('destination');
         $amount = $request->input('amount');
 
-        if(is_null($destination) || is_null($amount)) {
+        if(!($destination) || !($amount)) {
             return response()->json([
                 'message'=> 'Dados de destino e valor são obrigatórios.',
                 'status' => Response::HTTP_BAD_REQUEST

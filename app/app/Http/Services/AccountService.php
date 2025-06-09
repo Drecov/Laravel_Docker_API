@@ -62,6 +62,16 @@ class AccountService
         }
 
         $account->balance -= $amount;
+
+        if($account->balance < 0) {
+            return [
+                'account_id' => $origin,
+                'balance' => 0,
+                'payload' => 0,
+                'status' => 'error'
+            ];
+        }
+
         $account->save();
         $payload = '{"origin": {"id":"'.$account->account_id.'", "balance":'.$account->balance.'}}';
         return [
