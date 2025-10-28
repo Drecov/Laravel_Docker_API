@@ -10,3 +10,4 @@ Esse arquivo é para eu me lembrar de alguns comandos úteis para rodar o projet
     6.1 Cria uma APP_KEY no .env
 7. docker compose exec app php artisan make:resource NomeDoMeuModeloResource
     7.1 Cria um recurso modelo para respostas da API.
+8. docker compose exec app php artisan test

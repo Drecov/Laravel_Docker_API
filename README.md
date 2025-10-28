@@ -8,6 +8,7 @@ Para rodar o projeto, é necessário ter instalado localmente as seguintes depen
 #RODANDO O PROJETO:
 
 Este projeto possui é uma API segregada e Dockerizada, tal qual para rodar o projeto é necessário somente o Git e Docker instalados na máquina local.
+Ao subir o projeto, o mesmo realiza automaticamente as migrations e os testes unitários e de feature.
 
 Uma vez instalados o Git e Docker seguir os seguintes passos:
 1. Realizar o clone do projeto público: `git clone https://github.com/Drecov/Laravel_Docker_API.git`.
