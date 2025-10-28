@@ -41,3 +41,4 @@ Uma vez instalados o Git e Docker seguir os seguintes passos:
 
 Esse é um projeto Laravel, tal qual a única classe de objeto que temos é a Account. Ela é dividida em Model, Resource, Controller, Service e Test, tal qual se dá destaque para o *AccountController*, que possui a camada HTML das requisições, e o *AccountService*, que possui as regras de negócio.
 
+O projeto está disponível no github `https://github.com/Drecov/Laravel_Docker_API`
